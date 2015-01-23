@@ -1,0 +1,73 @@
+<script type="text/html" id="tpl-login">
+    <div>
+    <form id="logForm" class="form-horizontal" role="form" onSubmit="LogForm()" method="post">
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label"> Email
+          </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="email"
+              placeholder="Saisir votre email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">
+            Mot de passe </label>
+          <div class="col-sm-6">
+            <input type="password" class="form-control" name="password"
+              placeholder="Saisissez votre mot de passe">
+          </div>
+        </div>
+        <a href="#subscription" class="btn btn-default">Inscription</a>
+      <input type="submit" value="Connexion" id="submitButton" >
+  </form>
+    </div>
+</script>
+
+
+ <script type="text/html" id="tpl-subscription">
+    <div>
+     <h2>Inscription</h2>
+    <div>
+    <div id="contenu" >
+      <form id="subscriptForm" class="form-horizontal" role="form" onSubmit="sendSubscript()" method="post">
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">
+            Email</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="email"
+              placeholder="Votre adresse mail">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="plate" class="col-sm-2 control-label">
+            Numéro d immatriculation </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="plate"
+              placeholder="Votre numéro d'immatriculation">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password1" class="col-sm-2 control-label">
+            Mot de passe</label>
+          <div class="col-sm-6">
+            <input type="password" class="form-control" name="password1"
+              placeholder="Votre mot de passe">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password2" class="col-sm-2 control-label">
+            Mot de passe</label>
+          <div class="col-sm-6">
+            <input type="password" class="form-control" name="password2"
+              placeholder="Répétez votre mot de passe">
+          </div>
+        </div>
+
+
+        <input type="submit" value="Inscription" id="submitButton" >
+      </form>
+      </div>
+
