@@ -2,10 +2,10 @@
     <div>
     <form id="logForm" class="form-horizontal" role="form" onSubmit="LogForm()" method="post">
         <div class="form-group">
-          <label for="email" class="col-sm-2 control-label"> Email
+          <label for="mail" class="col-sm-2 control-label"> Email
           </label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" name="email"
+            <input type="text" class="form-control" name="mail"
               placeholder="Saisir votre email">
           </div>
         </div>
@@ -24,21 +24,21 @@
 </script>
 
 
- <script type="text/html" id="tpl-subscription">
+
+<script type="text/html" id="tpl-subscription">
     <div>
      <h2>Inscription</h2>
     <div>
     <div id="contenu" >
       <form id="subscriptForm" class="form-horizontal" role="form" onSubmit="sendSubscript()" method="post">
         <div class="form-group">
-          <label for="email" class="col-sm-2 control-label">
+          <label for="mail" class="col-sm-2 control-label">
             Email</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" name="email"
+            <input type="text" class="form-control" name="mail"
               placeholder="Votre adresse mail">
           </div>
         </div>
-        
         <div class="form-group">
           <label for="plate" class="col-sm-2 control-label">
             Numéro d immatriculation </label>
@@ -47,7 +47,6 @@
               placeholder="Votre numéro d'immatriculation">
           </div>
         </div>
-
         <div class="form-group">
           <label for="password1" class="col-sm-2 control-label">
             Mot de passe</label>
@@ -70,4 +69,101 @@
         <input type="submit" value="Inscription" id="submitButton" >
       </form>
       </div>
+</script>     
 
+
+
+
+ <script type="text/html" id="tpl-favorites">
+    <div>
+    <div>
+     <h2>Vos parkings préférés</h2>
+    </div>
+        <ul class="list-group">
+        {{#.}}
+        <li class="list-group-item">
+          <a href="#parking" onclick="sessionStorage['idParking']='{{id}}'">
+              <div class="media-body">
+                  <p>{{name}}</p>
+                 Addresse: {{address}}
+              </div>
+          </a>
+        </li>
+        {{/.}}
+    </ul>
+    </div>
+ </script>
+
+
+
+
+
+<script type="text/html" id="tpl-parking">
+     <div class="modal_photo">
+            <h3>{{name}}</h3>
+      </div>
+        <div class="modal_profil modal_zone_info">
+      <p>{{name}} </p>
+      <div>
+          <iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://cartosm.eu/map?lon={{lon}}&lat={{lat}}&zoom=17&width=400&height=350&mark=true&nav=true&pan=true&zb=inout&style=default&icon=down"></iframe>
+          </div>
+      <ul>
+           <li>Addresse: {{address}}</li>
+           <li>Prix: {{price}}</li>
+      </ul>
+    </div>
+        <div class="modal_profil modal_zone_info">
+            <p>Nombre de places libres: {{total-taken}}</p>
+        </div>
+     <a href="#book" onclick="sessionStorage['pid']='{{id}}'" class="btn btn-default">Réserver une place</a>
+</script>
+
+
+
+
+
+
+<script type="text/html" id="tpl-parking2">
+     <div class="modal_photo">
+            <h3>{{name}}</h3>
+      </div> 
+        <div class="modal_profil modal_zone_info">
+      <p>{{name}} </p>
+      <div>
+          <iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://cartosm.eu/map?lon={{lon}}&lat={{lat}}&zoom=17&width=400&height=350&mark=true&nav=true&pan=true&zb=inout&style=default&icon=down"></iframe>
+          </div>
+      <ul>
+           <li>Addresse: {{address}}</li>
+           <li>Prix: {{price}}</li>
+      </ul>
+    </div>
+        <div class="modal_profil modal_zone_info">
+            <p>Nombre de places libres: {{total-taken}}</p>
+        <a href="#endbook" onclick="sessionStorage['pid']='{{id}}'" class="btn btn-default"> Ne plus réserver cette place</a>
+</div>
+</script>
+
+
+
+
+
+ <script type="text/html" id="tpl-home">
+    <div>
+        <ul class="list-group">
+        {{#.}}
+        <li class="list-group-item">
+          <a href="#parking" onclick="sessionStorage['pid']='{{id}}'">
+              <div class="media-body">
+                  <p>{{name}}</p>
+                  {{address}}
+              </div>
+          </a>
+          <div>
+          <iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://cartosm.eu/map?lon={{lon}}&lat={{lat}}&zoom=17&width=400&height=350&mark=true&nav=true&pan=true&zb=inout&style=default&icon=down"></iframe>
+          </div>
+          <a href="#book" onclick="sessionStorage['pid']='{{id}}'" class="btn btn-default" >Réserver une place de parking</a>
+        </li>
+        {{/.}}
+    </ul>
+    </div>
+ </script>

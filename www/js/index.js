@@ -56,6 +56,28 @@ function onError() {
 
 
 
+function initialize() {
+  var mapOptions = {
+    zoom: 8,
+    center: new google.maps.LatLng(sessionStorage['lat'],sessionStorage['lon'])
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+}
+
+function loadScript() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+      'callback=initialize';
+  document.body.appendChild(script);
+}
+
+window.onload = loadScript;
+
+
+
 window.addEventListener('load', function () {
     new FastClick(document.body);
 }, false);
@@ -66,116 +88,85 @@ function route() {
     var page, hash = window.location.hash;
     switch (hash) {
 
-        //  case "#queues":
-        //     $.get('js/templates.html', function(templates) {
-        //         var p = sessionStorage["user_id"];
-        //         var template = $(templates).filter('#tpl-queues').html();
-        //         $.getJSON(server+"users/"+p+"/mine.json", function(objets) {
-        //             page = Mustache.render(template, objets);
-        //             console.log(objets);
-        //             document.getElementById("container").innerHTML = page;
-        //         });
+        case "#parking":
+            $.get('js/templates.html', function(templates) {
+               var template = $(templates).filter('#tpl-parking').html();
+                var param = sessionStorage['pid'];
 
-        //         $.get('js/templates.html', function(templates) {
-        //         page = $(templates).filter('#tpl-vide').html();
-        //         document.getElementById("container2").innerHTML = page;
-        //         });
-        //     }, 'html');
-        //     break;
-
-        // case "#aqueue":
-        //     $.get('js/templates.html', function(templates) {
-        //        var template = $(templates).filter('#tpl-aqueue').html();
-        //         var param = sessionStorage['idQueue'];
-
-        //         $.getJSON(server+"queue_models/"+param+".json", function(objets) {
-        //             page = Mustache.render(template, objets);
-        //             console.log(objets);
-        //             document.getElementById("container").innerHTML = page;
-        //         });
-
-        //         $.get('js/templates.html', function(templates) {
-        //         page = $(templates).filter('#tpl-vide').html();
-        //         document.getElementById("container2").innerHTML = page;
-        //     });
-
-        //     }, 'html');
-
-        //     break;
+                $.getJSON(server+"parkings/"+param+".json", function(objets) {
+                    page = Mustache.render(template, objets);
+                    console.log(objets);
+                    document.getElementById("container").innerHTML = page;
+                });
+            }, 'html');
+            break;
 
 
-        // case "#book":
-        //     $.get('js/templates.html', function(templates) {
-        //        var template;
-        //         var param = sessionStorage['idQueue'];
+        case "#book":
+            $.get('js/templates.html', function(templates) {
+               var template;
+                var param = sessionStorage['pid'];
 
-        //         $.post(server+"queue_models/"+param+"/book.json", {}, function(objets) {
-        //         });
+                $.post(server+"parkings/"+param+"/book.json", {}, function(objets) {
+                });
+                $.getJSON(server+"parkings/"+param+"/json", function(objets) {
+                    template=$(templates).filter('#tpl-parking2').html();
+                    page = Mustache.render(template, objets);
+                    console.log(objets);
+                    document.getElementById("container").innerHTML = page;
+                });
 
-        //         $.getJSON(server+"queue_models/"+param+".json", function(objets) {
-        //             template=$(templates).filter('#tpl-book').html();
-        //             page = Mustache.render(template, objets);
-        //             console.log(objets);
-        //             document.getElementById("container").innerHTML = page;
-        //         });
+            }, 'html');
+            break;
 
-        //         $.getJSON(server+"queue_models/"+param+"/info.json", function(objets) {
-        //             template=$(templates).filter('#tpl-book2').html();
-        //             page = Mustache.render(template, objets);
-        //             console.log(objets);
-        //             document.getElementById("container2").innerHTML = page;
-        //         });
+            case "#endbook":
+            $.get('js/templates.html', function(templates) {
+               var template;
+                var param = sessionStorage['pid'];
 
-        //     }, 'html');
-        //     break;
+                $.post(server+"parkings/"+param+"/endbook.json", {}, function(objets) {
+                });
 
-        // case "#login":
-        //     if(sessionStorage["user_id"]==undefined){
-        //         $.get('js/templates.html', function(templates) {
-        //             page = $(templates).filter('#tpl-login').html();
-        //             document.getElementById("container").innerHTML = page;
-        //             }, 'html');
-        //     }
-        //     else{
-        //         $.get('js/templates.html', function(templates) {
-        //             page = $(templates).filter('#tpl-already-logged').html();
-        //             document.getElementById("container").innerHTML = page;
-        //             }, 'html');
-        //     }
-        //     $.get('js/templates.html', function(templates) {
-        //         page = $(templates).filter('#tpl-vide').html();
-        //         document.getElementById("container2").innerHTML = page;
-        //         }, 'html');
-        //     break;
 
-        // case "#logged":
-        //     $.get('js/templates.html', function(templates) {
-        //         var object={"user":{"email":sessionStorage["email"],"password":sessionStorage["password"]}};
+                $.getJSON(server+"parkings/"+param+"/json", function(objets) {
+                    template=$(templates).filter('#tpl-parking').html();
+                    page = Mustache.render(template, objets);
+                    console.log(objets);
+                    document.getElementById("container").innerHTML = page;
+                });
+
+            }, 'html');
+            break;
+
+
+        case "#logged":
+            $.get('js/templates.html', function(templates) {
+                var object={"users":{"mail":sessionStorage["mail"],"password":sessionStorage["password"]}};
                 
-        //         $.post(server+"users/log.json", object, function(data){
-        //             sessionStorage["user_id"]=data.user_id;
-        //         });
-        //         if (sessionStorage["user_id"]==undefined){
-        //             page = $(templates).filter('#tpl-login').html();
-        //         document.getElementById("container").innerHTML = page;
-        //         }
-        //         else{
-        //             page = $(templates).filter('#tpl-logged').html();
-        //         document.getElementById("container").innerHTML = page;
-        //         }
-        //     }, 'html');
-        //     break;
+                $.post(server+"users/log.json", object, function(data){
+                    sessionStorage["user_id"]=data.uid;
+                });
+                if (sessionStorage["user_id"]==undefined){
+                    page = $(templates).filter('#tpl-login').html();
+                document.getElementById("container").innerHTML = page;
+                }
+                else{
+                    page = $(templates).filter('#tpl-home').html();
+                document.getElementById("container").innerHTML = page;
+                }
+            }, 'html');
+            break;
 
-        // case "#logout":
-        //     $.get('js/templates.html', function(templates) {
-        //         var p = sessionStorage["user_id"];
-        //         $.post(server+"users/"+p+"logout.json", {}, function(data){
-        //             sessionStorage["user_id"]==undefined;
-        //             page = $(templates).filter('#tpl-home').html();
-        //             document.getElementById("container").innerHTML = page;
-        //         });                 
-        //     }, 'html');
-        //     break;
+        case "#logout":
+            $.get('js/templates.html', function(templates) {
+                var p = sessionStorage["user_id"];
+                $.post(server+"users/"+p+"logout.json", {}, function(data){
+                    sessionStorage["user_id"]==undefined;
+                    page = $(templates).filter('#tpl-login').html();
+                    document.getElementById("container").innerHTML = page;
+                });                 
+            }, 'html');
+            break;
 
 
          case "#subscription":
@@ -185,15 +176,16 @@ function route() {
             }, 'html');
             break;
 
-        // case "#subscribed":
-        //     $.get('js/templates.html', function(templates) {
-        //         var object={"username":sessionStorage["username"],"firstname":sessionStorage["firstname"],"lastname":sessionStorage["lastname"],"email":sessionStorage["email"],"password":sessionStorage["password"]};
-        //         $.post(server+"users.json", object, function(data){
-        //         });
-        //         page = $(templates).filter('#tpl-subscribed').html();
-        //         document.getElementById("container").innerHTML = page;
-        //     }, 'html');
-        //     break;
+
+        case "#subscribed":
+            $.get('js/templates.html', function(templates) {
+                var object={"user":{"mail":sessionStorage["mail"], "plate":sessionStorage["plate"], "password":sessionStorage["password1"]}};
+                $.post(server+"users.json", object, function(data){
+                });
+                page = $(templates).filter('#tpl-login').html();
+                document.getElementById("container").innerHTML = page;
+            }, 'html');
+            break;
 
         // case "#gps":
         //     $.get('js/templates.html', function(templates) {
@@ -203,19 +195,37 @@ function route() {
         //     }, 'html');
         //     break;
  
+
+        case "#favorites":
+           $.get('js/templates.html', function(templates) {
+                var uid = sessionStorage['user_id']
+                var template = $(templates).filter('#tpl-favorites').html();
+                $.getJSON(server+"users/"+uid+"favorites", function(objets) {
+                    page = Mustache.render(template, objets);
+                    console.log(objets);
+                    document.getElementById("container").innerHTML = page;
+                });
+            }, 'html');
+            break;
+
+
         default:
-             if(sessionStorage["user_id"]==undefined){
-                $.get("js/templates.html", function(templates) {
-                    page = $(templates).filter('#tpl-login').html();
+            //  if(sessionStorage["user_id"]==undefined){
+            //     $.get("js/templates.html", function(templates) {
+            //         page = $(templates).filter('#tpl-login').html();
+            //         document.getElementById("container").innerHTML = page;
+            //     }, 'html');
+            // }
+            // else {
+                $.get('js/templates.html', function(templates) {
+                var template = $(templates).filter('#tpl-home').html();
+                $.getJSON(server+"parkings.json", function(objets) {
+                    page = Mustache.render(template, objets);
+                    console.log(objets);
                     document.getElementById("container").innerHTML = page;
-                }, 'html');
-            }
-            else {
-                $.get("js/templates.html", function(templates) {
-                    page = $(templates).filter('#tpl-home').html();
-                    document.getElementById("container").innerHTML = page;
-                }, 'html');
-            }
+                });
+            }, 'html');
+            // }
             break;
     }
 }
