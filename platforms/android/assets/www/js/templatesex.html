@@ -1,0 +1,266 @@
+<script type="text/html" id="tpl-home">
+<div>
+            <img src="http://www.google.fr/url?source=imglanding&ct=img&q=http://www.coloriages.fr/coloriages/coloriage-os-de-chien.jpg&sa=X&ei=zXR7VPPCApTlas3ngbgL&ved=0CAkQ8w&usg=AFQjCNG7btgNKSvKVEDGn9kdScHQmRHlEg" alt="chien" height="84" width="102" />
+        </div>
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="#profil" class="btn btn-default">Inscription</a>
+                    <a href="#login" class="btn btn-default">Connexion</a>
+                </li>
+            </ul>
+            </div>
+
+
+</script>
+
+
+<script type="text/html" id="tpl-home2">
+<div>
+            <img src="http://www.google.fr/url?source=imglanding&ct=img&q=http://www.coloriages.fr/coloriages/coloriage-os-de-chien.jpg&sa=X&ei=zXR7VPPCApTlas3ngbgL&ved=0CAkQ8w&usg=AFQjCNG7btgNKSvKVEDGn9kdScHQmRHlEg" alt="chien" height="84" width="102" />
+        </div>
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="#allqueues">Toutes les queues</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#queues">Mes queues</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#gps">Mes coordonnées gps</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#logout" class="btn btn-default">Deconnexion</a>
+                </li>
+            </ul>
+            </div>
+          <div id="map" style="width:300px; height:450px"> </div>
+</script>
+
+
+
+<script type="text/html" id="tpl-queues">
+    <div>
+    <div>
+     <h2>Mes queues</h2>
+    </div>
+        <ul class="list-group">
+        {{#.}}
+        <li class="list-group-item">
+          <a href="#aqueue" onclick="sessionStorage['idQueue']='{{id}}'">
+              <div class="media-body">
+                  <p>{{name}}</p>
+                  Client qui passe: {{num_customer}}
+                  Votre numéro:
+                  Temps moyen par client: {{average_time}}
+              </div>
+        </li>
+        {{/.}}
+    </ul>
+    </div>
+</script>
+
+
+ <script type="text/html" id="tpl-allqueues">
+    <div>
+    <div>
+     <h2>Toutes les queues</h2>
+    </div>
+        <ul class="list-group">
+        {{#.}}
+        <li class="list-group-item">
+          <a href="#aqueue" onclick="sessionStorage['idQueue']='{{id}}'">
+              <div class="media-body">
+                  <p>{{name}}</p>
+                  {{description}}
+              </div>
+          </a>
+          <div>
+          <iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://cartosm.eu/map?lon={{gps_lon}}&lat={{gps_lat}}&zoom=17&width=400&height=350&mark=true&nav=true&pan=true&zb=inout&style=default&icon=down"></iframe>
+          </div>
+          <a href="#book" onclick="sessionStorage['idQueue']='{{id}}'" class="btn btn-default" >Faire la queue</a>
+        </li>
+        {{/.}}
+    </ul>
+    </div>
+ </script>
+
+<script type="text/html" id="tpl-book">
+     <div class="modal_photo">
+            <img src={{image}}>
+            <h3>{{name}}</h3>
+      </div>
+        <div class="modal_profil modal_zone_info">
+      <p>Localisation :{{gps_lon}}, {{gps_lat}} </p>
+      <ul>
+           <li>{{description}}</li>
+      </ul>
+    </div>
+        <div class="modal_profil modal_zone_info">
+            <p>Client qui passe: {{num_customer}}</p>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/html" id="tpl-book2">
+    <div class="modal_profil modal_zone_info">
+            <p>Vous êtes le client : {{number}}</p>
+        </div>
+</script>
+
+<script type="text/html" id="vide">
+    <div> <p>  </p>
+        </div>
+</script>
+
+
+        
+
+<script type="text/html" id="tpl-login">
+    <div>
+     <h2>Connexion</h2>
+    </div>
+    <div>
+    <form id="logForm" class="form-horizontal" role="form" onSubmit="LogForm()" method="post">
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label"> Email
+          </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="email"
+              placeholder="Saisir votre email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">
+            Mot de passe </label>
+          <div class="col-sm-6">
+            <input type="password" class="form-control" name="password"
+              placeholder="Saisir votre mot de passe">
+          </div>
+        </div>
+      <input type="submit" value="Se connecter" id="submitButton" >
+  </form>
+    </div>
+</script>
+
+<script type="text/html" id="tpl-logged">
+    <div>
+     <h2>Vous venez de vous connecter</h2>
+    </div>
+    <div>
+    </div>
+</script>
+
+<script type="text/html" id="tpl-already-logged">
+    <div>
+     <h2>Vous êtes déjà connecté</h2>
+    </div>
+    <div>
+    </div>
+</script>
+
+
+
+ <script type="text/html" id="tpl-aqueue">
+     <div class="modal_photo">
+            <img src={{image}}>
+            <h3>{{name}}</h3>
+      </div>
+        
+        <div class="modal_profil modal_zone_info">
+      <p>Localisation :{{gps_lon}}, {{gps_lat}} </p>
+
+      <ul>
+           <li>{{description}}</li>
+           <iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://cartosm.eu/map?lon={{gps_lon}}&lat={{gps_lat}}&zoom=17&width=400&height=350&mark=true&nav=true&pan=true&zb=inout&style=default&icon=down"></iframe>
+      </ul>
+    </div>
+
+        <div class="modal_profil modal_zone_info">
+            <p>Client qui passe: {{num_customer}}</p>
+        </div>
+        <div class="modal_profil modal_zone_info">
+            <p>Dernier client à attendre : {{last_customer}}</p>
+        </div>
+      
+
+     <a href="#book" class="btn btn-default">Faire la queue</a>
+</div>
+</script>
+
+
+ <script type="text/html" id="tpl-profil">
+    <div>
+     <h2>Inscription</h2>
+     <div class="modal_message_erreur_saisie"> </div>
+    <div>
+    <div id="contenu" >
+      <form id="subscriptForm" class="form-horizontal" role="form" onSubmit="sendSubscript()" method="post">
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">
+            Nom utilisateur</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="username"
+              placeholder="Votre nom d'utilisateur">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="firstname" class="col-sm-2 control-label"> Prénom
+          </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="firstname"
+              placeholder="Saisir votre nom de famille">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastname" class="col-sm-2 control-label">
+            Nom </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="lastname"
+              placeholder="Saisir votre prenom">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">
+            Email </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="email" placeholder="Saisir votre adresse mail">
+            <div class="col-sm-3" id="check_number_message"> 
+          </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">
+            Mot de passe</label>
+          <div class="col-sm-6">
+            <input type="password" class="form-control" name="password"
+              placeholder="Votre password">
+          </div>
+        </div>
+        <input type="submit" value="Inscription" id="submitButton" >
+      </form>
+      </div>
+
+      <div class="modal_message_erreur_saisie"> </div>
+     </div>
+    </div>
+ </script>
+
+<script type="text/html" id="tpl-subscribed">
+    <div>
+    <div>
+     <h2>Inscription faite</h2>
+    </div>
+    </div>
+</script>
+
+ <script type="text/html" id="tpl-gps">
+<div>
+  <div class="scroller">
+    <p id="geolocation">Recherche des coordonnées GPS en cours...</p>
+  <div>
+  <iframe width="400" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://cartosm.eu/map?lon={{position.coords.longitude}}&lat={{position.coords.latitude}}&zoom=17&width=400&height=350&mark=true&nav=true&pan=true&zb=inout&style=default&icon=down"></iframe>
+</div>
+ </script>

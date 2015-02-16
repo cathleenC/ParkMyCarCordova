@@ -27,8 +27,7 @@ function onDeviceReady() {
 
 function onSuccess(position) {
     var element = document.getElementById('geolocation');
-        element.innerHTML =
-        'Latitude:          '+ position.coords.latitude+'<br/>'+
+        element.innerHTML = 'Latitude:          '+ position.coords.latitude+'<br/>'+
         'Longitude:         '+ position.coords.longitude+'<br/>'+
         'Altitude:          '+ position.coords.altitude+'<br/>'+
         'Accuracy:          '+ position.coords.accuracy+'<br/>'+
@@ -210,13 +209,13 @@ function route() {
 
 
         default:
-            //  if(sessionStorage["user_id"]==undefined){
-            //     $.get("js/templates.html", function(templates) {
-            //         page = $(templates).filter('#tpl-login').html();
-            //         document.getElementById("container").innerHTML = page;
-            //     }, 'html');
-            // }
-            // else {
+              if(sessionStorage["user_id"]==undefined){
+                 $.get("js/templates.html", function(templates) {
+                     page = $(templates).filter('#tpl-login').html();
+                     document.getElementById("container").innerHTML = page;
+                 }, 'html'); 
+             }
+             else {
                 $.get('js/templates.html', function(templates) {
                 var template = $(templates).filter('#tpl-home').html();
                 $.getJSON(server+"parkings.json", function(objets) {
@@ -225,7 +224,7 @@ function route() {
                     document.getElementById("container").innerHTML = page;
                 });
             }, 'html');
-            // }
+             }
             break;
     }
 }

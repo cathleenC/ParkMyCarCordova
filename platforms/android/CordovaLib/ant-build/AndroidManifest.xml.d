@@ -1,2 +1,2 @@
-C:\Development\workspace\ticketeo\platforms\android\CordovaLib\ant-build\AndroidManifest.xml : \
-C:\Development\workspace\ticketeo\platforms\android\CordovaLib\AndroidManifest.xml \
+C:\xampp\htdocs\ParkMyCarCordova\platforms\android\CordovaLib\ant-build\AndroidManifest.xml : \
+C:\xampp\htdocs\ParkMyCarCordova\platforms\android\CordovaLib\AndroidManifest.xml \

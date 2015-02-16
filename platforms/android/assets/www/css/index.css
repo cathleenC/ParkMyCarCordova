@@ -79,3 +79,24 @@
     color: #747474;
     font-weight: bold;
 }
+
+.modal_message_erreur_saisie {
+    display: block;
+    padding: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
+    color: red;
+    font-weight: bold;
+    min-width:100%;
+    text-align:center;
+}
+ 
+#check_number_message {
+    display: block;
+    float: left;
+    margin-left: 10px;
+    margin-top:5px;
+    vertical-align:center;
+    color: black;
+}
+
